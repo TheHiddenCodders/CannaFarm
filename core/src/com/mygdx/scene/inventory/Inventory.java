@@ -92,6 +92,7 @@ public class Inventory extends Group {
 		
 		slots.get(0).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")));
 		slots.get(1).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")));
+		slots.get(0).get(1).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")));
 	}
 	
 	/**

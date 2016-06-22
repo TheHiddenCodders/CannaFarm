@@ -131,6 +131,22 @@ public class InventoryItem extends Actor implements Serializable{
 	public void read(Json json, JsonValue jsonData) {
 		this.id = jsonData.child.next.asInt();
 	}
+	
+	
+	// Equals
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof InventoryItem){
+			InventoryItem itemToCompare = (InventoryItem) obj;
+			
+			if (itemToCompare.getId() == this.getId()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 		
 	
 	// Factory

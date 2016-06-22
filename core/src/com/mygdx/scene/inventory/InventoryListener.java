@@ -58,9 +58,12 @@ public class InventoryListener extends ActorGestureListener {
 			
 			this.inventory.removeActor(this.dragItem);
 			
-			// TODO : if items are stackable then stack them.
 			// Check if the cursor is on a slot.
 			if (newSlot != null && newSlot.isEmpty()) {
+				newSlot.addItem(this.dragItem);
+				this.initialSlot.removeItem();
+			}
+			else if (newSlot != null && newSlot.getItem().equals(this.dragItem)) {
 				newSlot.addItem(this.dragItem);
 				this.initialSlot.removeItem();
 			}
