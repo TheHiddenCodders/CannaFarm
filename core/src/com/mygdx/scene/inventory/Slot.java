@@ -1,8 +1,12 @@
 package com.mygdx.scene.inventory;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.mygdx.scene.item.InventoryItem;
 
@@ -19,15 +23,14 @@ public class Slot extends Button {
 	/** Styles to use on the slot.*/
 	private ButtonStyle normalStyle, selectedStyle;
 	
+	/** Style apply on title */
+	private LabelStyle quantityStyle;
+	
+	/** The title */
+	private Label quantityLabel;
+	
 	
 	// Construction
-	
-	/**
-	 * Default constructor. Call {@link Button} default constructor.
-	 */
-	public Slot () {
-		super();
-	}
 	
 	/**
 	 * Constructor. Initialize the slot with styles.
@@ -37,9 +40,18 @@ public class Slot extends Button {
 	public Slot(ButtonStyle normalStyle, ButtonStyle selectedStyle) {
 		super(normalStyle);
 		
-		// Initialize item and quantity 
-		this.item = null;
+		// Create the label to display quantity
 		this.quantity = 0;
+		
+		BitmapFont quantityFont = new BitmapFont(new FileHandle("fonts/arial.fnt"));
+		this.quantityStyle = new LabelStyle();
+		this.quantityStyle.font = quantityFont;
+		
+		this.quantityLabel = new Label(String.valueOf(this.quantity), this.quantityStyle);
+		this.quantityLabel.setFontScale(0.5f);
+		
+		// Initialize item. 
+		this.item = null;
 		this.selected = false;
 		
 		// Memorize styles
@@ -113,14 +125,14 @@ public class Slot extends Button {
 		if (this.item == null) {
 			// Add the item into the slot. Replace it on the screen
 			this.item = item;
-			replaceItem();
-			
 			this.quantity = 1;
 		}
 		// Else, cjheck if the item already exist in the slot.
 		else if (this.item.equals(item)) {
 			this.quantity++;
 		}
+		
+		replaceItem();
 	}
 	
 	/**
@@ -128,6 +140,7 @@ public class Slot extends Button {
 	 */
 	public void removeItem() {
 		removeActor(this.item);
+		removeActor(this.quantityLabel);
 		this.item = null;
 		this.quantity = 0;
 	}
@@ -137,9 +150,15 @@ public class Slot extends Button {
 	 */
 	public void replaceItem() {
 		removeActor(this.item);
+		removeActor(this.quantityLabel);
+		
 		this.item.setSize(32, 32);
 		this.item.setPosition(3, 3);
+		
+		this.quantityLabel.setText(String.valueOf(this.quantity));
+		
 		addActor(this.item);
+		addActor(this.quantityLabel);
 	}
 	
 	// Button inherit methods.
