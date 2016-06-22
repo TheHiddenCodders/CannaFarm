@@ -1,0 +1,7 @@
+{
+texturePath: slots.png
+tileNumber: {
+	x: 4
+	y: 1
+}
+}

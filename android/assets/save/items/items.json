@@ -1,0 +1,5 @@
+{
+	pot: save/items/pot.json
+	sofa : save/items/sofa.json
+	itemName: save/items/monItem.json
+}

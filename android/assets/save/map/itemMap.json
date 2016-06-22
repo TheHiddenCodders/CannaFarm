@@ -1,0 +1,16 @@
+{
+size: {
+	x: 3
+	y: 3
+}
+tileSize: {
+	x: 64
+	y: 32
+}
+items : [
+	["sofa", "null", "pot"]
+	["pot", "pot", "null"]
+	["null", "null", "itemName"]
+]
+flip: true
+}

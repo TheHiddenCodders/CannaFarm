@@ -1,0 +1,7 @@
+{
+texturePath: buttonTileset.png
+tileNumber: {
+	x: 3
+	y: 1
+}
+}

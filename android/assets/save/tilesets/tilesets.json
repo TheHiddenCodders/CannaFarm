@@ -1,0 +1,7 @@
+{
+	item: save/tilesets/itemTileset.json
+	inventoryItem: save/tilesets/inventoryItemTileset.json
+	tile : save/tilesets/isometricTileset.json
+	slot: save/tilesets/slotTileset.json
+	
+}

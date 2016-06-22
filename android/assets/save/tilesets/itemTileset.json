@@ -1,0 +1,7 @@
+{
+texturePath: itemTileset.png
+tileNumber: {
+	x: 2
+	y: 1
+}
+}
