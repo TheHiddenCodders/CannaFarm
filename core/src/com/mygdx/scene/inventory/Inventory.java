@@ -90,9 +90,9 @@ public class Inventory extends Group {
 		// Add a listener to manage the drag of the interface and items.
 		addListener(new InventoryListener(this));
 		
-		slots.get(0).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")));
-		slots.get(1).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")));
-		slots.get(0).get(1).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")));
+		slots.get(0).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 1);
+		slots.get(1).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 1);
+		slots.get(0).get(1).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 1);
 	}
 	
 	/**

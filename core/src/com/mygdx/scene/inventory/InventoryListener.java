@@ -58,15 +58,20 @@ public class InventoryListener extends ActorGestureListener {
 			
 			this.inventory.removeActor(this.dragItem);
 			
-			// Check if the cursor is on a slot.
+			
+			
+			// Check if the cursor is on an empty slot.
 			if (newSlot != null && newSlot.isEmpty()) {
-				newSlot.addItem(this.dragItem);
+				newSlot.addItem(this.dragItem, this.initialSlot.getQuantity());
 				this.initialSlot.removeItem();
 			}
-			else if (newSlot != null && newSlot.getItem().equals(this.dragItem)) {
-				newSlot.addItem(this.dragItem);
+			// Else, check if the cursor is on a new slot with the same item 
+			else if (newSlot != null && newSlot != this.initialSlot && newSlot.getItem().equals(this.dragItem)) {
+				newSlot.addItem(this.dragItem, this.initialSlot.getQuantity());
+				System.out.println("newSlot: " + newSlot + "\n" + "initial: " + this.initialSlot);
 				this.initialSlot.removeItem();
 			}
+			// Else, replace the item properly in the slot.
 			else {
 				this.initialSlot.replaceItem();
 			}

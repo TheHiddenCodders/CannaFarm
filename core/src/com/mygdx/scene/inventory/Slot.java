@@ -98,6 +98,13 @@ public class Slot extends Button {
 	}
 	
 	
+	// Quantity methods
+	
+	public int getQuantity() {
+		return this.quantity;
+	}
+	
+	
 	// Item methods.
 	
 	/**
@@ -120,16 +127,16 @@ public class Slot extends Button {
 	 * Do nothing otherwise.
 	 * @param item the item to add in the solt.
 	 */
-	public void addItem(InventoryItem item) {
+	public void addItem(InventoryItem item, int quantity) {
 		// Check if the slot is empty
 		if (this.item == null) {
 			// Add the item into the slot. Replace it on the screen
 			this.item = item;
-			this.quantity = 1;
+			this.quantity = quantity;
 		}
 		// Else, cjheck if the item already exist in the slot.
 		else if (this.item.equals(item)) {
-			this.quantity++;
+			this.quantity += quantity;
 		}
 		
 		replaceItem();
