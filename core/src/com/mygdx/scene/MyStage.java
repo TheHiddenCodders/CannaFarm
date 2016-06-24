@@ -22,20 +22,21 @@ public class MyStage extends Stage {
 		super(viewport);
 		
 		// Load resources
-		gameTilesets = GameTilesets.loadFromJSON("save/tilesets/tilesets.json");
-		itemsPaths = GameItems.loadFromJSON("save/items/items.json");
-		
-		// Create a map
-		map = ItemMap.loadFromJSON("save/map/itemMap.json", gameTilesets, itemsPaths);
-		map.setPosition(400, 100);
-		addActor(map);
+		this.gameTilesets = GameTilesets.loadFromJSON("save/tilesets/tilesets.json");
+		this.itemsPaths = GameItems.loadFromJSON("save/items/items.json");
 		
 		// Create inventory
-		inventory = new Inventory(gameTilesets, itemsPaths);
-		inventory.setVisible(false);
+		this.inventory = new Inventory(this.gameTilesets, this.itemsPaths);
+		this.inventory.setVisible(false);
 		//inventory.setPosition(100, 100);
 		//inventory.setSize(200, 200);
-		addActor(inventory);
+				
+		// Create a map
+		this.map = ItemMap.loadFromJSON("save/map/itemMap.json", this.gameTilesets, this.itemsPaths, this.inventory);
+		this.map.setPosition(400, 100);
+		
+		addActor(this.map);
+		addActor(this.inventory);
 		
 		//InventoryItem item = InventoryItem.loadItemFromJSON(itemsPaths.getItemPath("pot"), gameTilesets.getTileset("inventoryItem"));
 		//addActor(item);
@@ -54,6 +55,9 @@ public class MyStage extends Stage {
 			}
 		});
 	}
+	
+	
+	// Stage inherit methods.
 
 	@Override
 	public void act(float delta) {

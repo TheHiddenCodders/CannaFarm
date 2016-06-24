@@ -29,6 +29,8 @@ public class Inventory extends Group {
 	/** All game items */
 	private GameItems gameItems;
 	
+	private InventoryListener listener;
+	
 	
 	/** The number of slot to display */
 	private int slotNumberX, slotNumberY;
@@ -88,7 +90,8 @@ public class Inventory extends Group {
 		createUI();
 		
 		// Add a listener to manage the drag of the interface and items.
-		addListener(new InventoryListener(this));
+		this.listener = new InventoryListener(this);
+		addListener(this.listener);
 		
 		slots.get(0).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 1);
 		slots.get(1).get(0).addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 1);
@@ -232,5 +235,19 @@ public class Inventory extends Group {
 	 */
 	public int getSlotNumberY() {
 		return this.slotNumberY;
+	}
+	
+	
+	// Drag methods
+	
+	/**
+	 * @return true if an item is dragged, false otherwise.
+	 */
+	public boolean isItemDrag() {
+		if (this.listener.isItemDrag()) {
+			return true;
+		}
+		
+		return false;
 	}
 }

@@ -1,10 +1,14 @@
 package com.mygdx.scene.map;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.scene.inventory.Inventory;
 import com.mygdx.scene.item.Item;
 import com.mygdx.scene.resources.GameItems;
 import com.mygdx.scene.resources.GameTilesets;
@@ -16,6 +20,8 @@ public class ItemMap extends Map implements Serializable {
 	
 	/** All values read in the JSON file to create items. */
 	private Array<Array<String>> itemsSave;
+	
+	private Inventory inventory;
 	
 	
 	// Construction
@@ -52,7 +58,7 @@ public class ItemMap extends Map implements Serializable {
 	 * @param gameItems a reference to all game items.
 	 * @param itemTileset a reference to the tileset to set on items.
 	 */
-	private void initFromFile(GameItems gameItems, Tileset itemTileset) {
+	private void initFromFile(GameItems gameItems, Tileset itemTileset, final Inventory inventory) {
 		// Create items
 		this.items = new Array<Array<Item>>();
 		createItems();
@@ -66,6 +72,33 @@ public class ItemMap extends Map implements Serializable {
 				}
 			}
 		}
+		
+		// Add the reference to the inventory
+		this.inventory = inventory;
+		
+		addListener(new InputListener() {
+			//private boolean onMap;
+			
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				//onMap = true;
+				System.out.println("enter on map");
+				if (inventory.isItemDrag()) {
+					touchDown(event, x, y, pointer, 0);
+				}
+			}
+			
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				//onMap = false;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				System.out.println("Touch up.");
+				
+				if (inventory.isItemDrag() /*&& onMap*/) {
+					System.out.println("Place item on map here.");
+				}
+			}
+		});
 	}
 	
 	
@@ -171,7 +204,7 @@ public class ItemMap extends Map implements Serializable {
 	 * @param gameItems a reference to all game's tilesets.
 	 * @return the created map.
 	 */
-	public static ItemMap loadFromJSON(String jsonPath, GameTilesets tilesets, GameItems gameItems) {
+	public static ItemMap loadFromJSON(String jsonPath, GameTilesets tilesets, GameItems gameItems, final Inventory inventory) {
 		Json json = new Json();
 		
 		// Load the file.
@@ -184,7 +217,7 @@ public class ItemMap extends Map implements Serializable {
 		createdMap.setTileset(tilesets.getTileset("tile"));
 		
 		// Create items according to read data.
-		createdMap.initFromFile(gameItems, tilesets.getTileset("item"));
+		createdMap.initFromFile(gameItems, tilesets.getTileset("item"), inventory);
 		
 		
 		// return the map.

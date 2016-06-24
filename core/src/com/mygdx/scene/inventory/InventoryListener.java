@@ -27,6 +27,8 @@ public class InventoryListener extends ActorGestureListener {
 	}
 	
 	
+	// Inherit methods.
+	
 	public void tap(InputEvent event, float x, float y, int count, int button) {
 		// Deselect all slot except one which is pointed.
         for (int i = 0; i < this.inventory.getSlotNumberX(); i++) {
@@ -90,5 +92,19 @@ public class InventoryListener extends ActorGestureListener {
 		else if (!(getTouchDownTarget() instanceof Slot)) {
 			this.inventory.setPosition(this.inventory.getX() + deltaX, this.inventory.getY() + deltaY);
 		}
+	}
+	
+	
+	// drag methods.
+	
+	/**
+	 * @return true if an item is dragged, false otherwise.
+	 */
+	public boolean isItemDrag() {
+		if (this.dragItem != null && this.initialSlot != null) {
+			return true;
+		}
+		
+		return false;
 	}
 }

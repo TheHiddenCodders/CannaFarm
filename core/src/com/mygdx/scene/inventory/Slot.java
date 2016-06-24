@@ -100,6 +100,9 @@ public class Slot extends Button {
 	
 	// Quantity methods
 	
+	/**
+	 * @return the quantity of the stored item.
+	 */
 	public int getQuantity() {
 		return this.quantity;
 	}
