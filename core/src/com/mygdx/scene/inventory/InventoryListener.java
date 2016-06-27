@@ -27,6 +27,8 @@ public class InventoryListener extends ActorGestureListener {
 	}
 	
 	
+	// Inherit methods.
+	
 	public void tap(InputEvent event, float x, float y, int count, int button) {
 		// Deselect all slot except one which is pointed.
         for (int i = 0; i < this.inventory.getSlotNumberX(); i++) {
@@ -58,12 +60,17 @@ public class InventoryListener extends ActorGestureListener {
 			
 			this.inventory.removeActor(this.dragItem);
 			
-			// TODO : if items are stackable then stack them.
-			// Check if the cursor is on a slot.
+			// Check if the cursor is on an empty slot.
 			if (newSlot != null && newSlot.isEmpty()) {
-				newSlot.addItem(this.dragItem);
+				newSlot.addItem(this.dragItem, this.initialSlot.getQuantity());
 				this.initialSlot.removeItem();
 			}
+			// Else, check if the cursor is on a new slot with the same item 
+			else if (newSlot != null && newSlot != this.initialSlot && newSlot.getItem().equals(this.dragItem)) {
+				newSlot.addItem(this.dragItem, this.initialSlot.getQuantity());
+				this.initialSlot.removeItem();
+			}
+			// Else, replace the item properly in the slot.
 			else {
 				this.initialSlot.replaceItem();
 			}
@@ -82,5 +89,19 @@ public class InventoryListener extends ActorGestureListener {
 		else if (!(getTouchDownTarget() instanceof Slot)) {
 			this.inventory.setPosition(this.inventory.getX() + deltaX, this.inventory.getY() + deltaY);
 		}
+	}
+	
+	
+	// drag methods.
+	
+	/**
+	 * @return true if an item is dragged, false otherwise.
+	 */
+	public boolean isItemDrag() {
+		if (this.dragItem != null && this.initialSlot != null) {
+			return true;
+		}
+		
+		return false;
 	}
 }
