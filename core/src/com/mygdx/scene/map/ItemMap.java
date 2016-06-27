@@ -76,7 +76,7 @@ public class ItemMap extends Map implements Serializable {
 		// Add the reference to the inventory
 		this.inventory = inventory;
 		
-		addListener(new InputListener() {
+		/*addListener(new InputListener() {
 			//private boolean onMap;
 			
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -94,11 +94,11 @@ public class ItemMap extends Map implements Serializable {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				System.out.println("Touch up.");
 				
-				if (inventory.isItemDrag() /*&& onMap*/) {
+				if (inventory.isItemDrag()) {
 					System.out.println("Place item on map here.");
 				}
 			}
-		});
+		});*/
 	}
 	
 	
