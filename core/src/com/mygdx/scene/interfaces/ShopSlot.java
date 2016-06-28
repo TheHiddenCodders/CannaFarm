@@ -1,13 +1,19 @@
 package com.mygdx.scene.interfaces;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.scene.item.InventoryItem;
 
 public class ShopSlot extends Button {
@@ -29,6 +35,8 @@ public class ShopSlot extends Button {
 	/** The title */
 	private Label nameLabel, priceLabel;
 	
+	private Table mainTable;
+	private Cell<InventoryItem> itemCell;
 	
 	// Construction
 	
@@ -39,12 +47,17 @@ public class ShopSlot extends Button {
 		this.normalStyle = normalStyle;
 		this.selectedStyle = selectedStyle;
 		
-		BitmapFont quantityFont = new BitmapFont(new FileHandle("fonts/arial.fnt"));
+		BitmapFont nameFont = new BitmapFont(new FileHandle("fonts/arial.fnt"));
 		this.nameStyle = new LabelStyle();
-		this.nameStyle.font = quantityFont;
+		this.nameStyle.font = nameFont;
 		
 		this.nameLabel = new Label("", this.nameStyle);
 		this.nameLabel.setFontScale(0.5f);
+		
+		// Create the background image
+		/*Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
+		pixmap.setColor(0.32f, 0.36f, 0.36f, 0.8f);
+		pixmap.fill();*/
 		
 		this.priceLabel = new Label("0 CG", this.nameStyle);
 		this.priceLabel.setFontScale(0.4f);
@@ -53,6 +66,16 @@ public class ShopSlot extends Button {
 		this.item = null;
 		this.selected = false;
 		this.price = 0;
+		
+		// Create the main table.
+		this.mainTable = new Table();
+		this.mainTable.setFillParent(true);
+		addActor(this.mainTable);
+		
+		this.itemCell = this.mainTable.add(this.item).width(32).height(32);
+		this.mainTable.add(this.nameLabel).expandX();
+		this.mainTable.row();
+		this.mainTable.add(this.priceLabel).colspan(2).right();
 		
 		// Add a listener to manage slot's selection
 		addListener(new ActorGestureListener() {
@@ -106,13 +129,15 @@ public class ShopSlot extends Button {
 			this.nameLabel.setText("Item name here.");
 			this.priceLabel.setText(String.valueOf(this.price) + " CG");
 			
-			this.item.setSize(32, 32);
-			this.item.setPosition(10, 27);
-			this.nameLabel.setPosition(52, 43);
-			this.priceLabel.setPosition(200 - this.priceLabel.getWidth()*40/100, 0);
 			
-			addActor(this.item);
-			addActor(this.nameLabel);
-			addActor(this.priceLabel);
+			this.itemCell.setActor(this.item).width(32).height(32).pad(10);
+			//this.item.setSize(32, 32);
+			//this.item.setPosition(10, 27);
+			//this.nameLabel.setPosition(52, 43);
+			//this.priceLabel.setPosition(200 - this.priceLabel.getWidth()*40/100, 0);
+			
+			//addActor(this.item);
+			//addActor(this.nameLabel);
+			//addActor(this.priceLabel);
 		}
 }
