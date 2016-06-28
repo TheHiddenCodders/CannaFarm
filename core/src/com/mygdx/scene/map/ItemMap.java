@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.scene.inventory.Inventory;
+import com.mygdx.scene.interfaces.Inventory;
 import com.mygdx.scene.item.Item;
 import com.mygdx.scene.resources.GameItems;
 import com.mygdx.scene.resources.GameTilesets;

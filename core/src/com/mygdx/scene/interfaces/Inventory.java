@@ -1,4 +1,4 @@
-package com.mygdx.scene.inventory;
+package com.mygdx.scene.interfaces;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -56,7 +56,7 @@ public class Inventory extends Group {
 	private Label title;
 	
 	/** All slots of the inventory */
-	private Array<Array<Slot>> slots;
+	private Array<Array<InventorySlot>> slots;
 	
 	
 	// Construction
@@ -82,7 +82,7 @@ public class Inventory extends Group {
 		
 		this.titleHeight = 33;
 		
-		this.slots = new Array<Array<Slot>>();
+		this.slots = new Array<Array<InventorySlot>>();
 		
 		// Create the components.
 		setSize(this.slotSizeX*this.slotNumberX + 30, this.slotSizeY*this.slotNumberY + this.titleHeight + 10 + 30);
@@ -147,7 +147,7 @@ public class Inventory extends Group {
 	private void createUI() {
 		// Create the background image
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
-		pixmap.setColor(0.32f, 0.36f, 0.36f, 1.f);
+		pixmap.setColor(0.32f, 0.36f, 0.36f, 0.8f);
 		pixmap.fill();
 		
 		Image background = new Image(new Texture(pixmap));
@@ -173,10 +173,10 @@ public class Inventory extends Group {
 		
 		// Create and add slots to the UI.
 		for (int i = 0; i < this.slotNumberY; i++) {
-			this.slots.add(new Array<Slot>());
+			this.slots.add(new Array<InventorySlot>());
 			
 			for (int j = 0; j < this.slotNumberX; j++) {
-				this.slots.get(i).add(new Slot(this.normalStyle, this.selectedStyle));
+				this.slots.get(i).add(new InventorySlot(this.normalStyle, this.selectedStyle));
 				this.slotTable.add(this.slots.get(i).get(j)).width(this.slotSizeX).height(this.slotSizeY);
 			}
 			
@@ -192,7 +192,7 @@ public class Inventory extends Group {
 	 * @param positionY vertical cursor position.
 	 * @return the slot pointed by cursor. Null if any.
 	 */
-	public Slot getSlotFromCursor(float positionX, float positionY) {
+	public InventorySlot getSlotFromCursor(float positionX, float positionY) {
 		// Compute the pointed slot position.
 		int slotPositionX = (int) ((positionX - 15) / this.slotSizeX);
 		int slotPositionY = (this.slotNumberY - 1) - (int) ((positionY - 15) / this.slotSizeY);
@@ -212,7 +212,7 @@ public class Inventory extends Group {
 	 * @param positionY vertical slot position.
 	 * @return the slot in specified position.
 	 */
-	public Slot getSlotFromPosition(int positionX, int positionY) {
+	public InventorySlot getSlotFromPosition(int positionX, int positionY) {
 		// check if a slot exist to the specified position.
 		if (positionX >= 0 && positionX < this.slotNumberX) {
 			if (positionY >= 0 && positionY < this.slotNumberY) {

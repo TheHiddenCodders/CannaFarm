@@ -1,4 +1,4 @@
-package com.mygdx.scene.inventory;
+package com.mygdx.scene.interfaces;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -9,7 +9,7 @@ public class InventoryListener extends ActorGestureListener {
 	private InventoryItem dragItem = null;
 	
 	/** A reference to the slot which the item coming from. Null if any. */
-	private Slot initialSlot = null;
+	private InventorySlot initialSlot = null;
 	
 	
 	/** A reference to the inventory. */
@@ -56,7 +56,7 @@ public class InventoryListener extends ActorGestureListener {
 		// Check if an item was drag
 		if (this.initialSlot != null && this.dragItem != null) {
 			// Get the pointed slot
-			Slot newSlot = this.inventory.getSlotFromCursor(x, y);
+			InventorySlot newSlot = this.inventory.getSlotFromCursor(x, y);
 			
 			this.inventory.removeActor(this.dragItem);
 			
@@ -86,7 +86,7 @@ public class InventoryListener extends ActorGestureListener {
 				this.dragItem.setPosition(x, y);
 		}
 		// Check if a the dragged actor is not a slot.
-		else if (!(getTouchDownTarget() instanceof Slot)) {
+		else if (!(getTouchDownTarget() instanceof InventorySlot)) {
 			this.inventory.setPosition(this.inventory.getX() + deltaX, this.inventory.getY() + deltaY);
 		}
 	}
