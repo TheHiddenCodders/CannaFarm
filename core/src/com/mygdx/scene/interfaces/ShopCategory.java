@@ -72,5 +72,7 @@ public class ShopCategory extends Group {
 		
 		this.mainTable.add(this.slots.get(this.slots.size - 1)).width(200).height(70);
 		this.mainTable.row();
+		
+		setHeight(70*this.slots.size);
 	}
 }

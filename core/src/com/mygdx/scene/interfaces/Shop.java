@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
@@ -131,6 +133,15 @@ public class Shop extends Group {
 		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 10);
 		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 100);
 		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 1000);
+		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 10000);
+		
+		/*ScrollPaneStyle style = new ScrollPaneStyle();
+		style.
+		ScrollPane pane = new ScrollPane(this.categories);
+		//pane.setSize(220, 100);
+		this.mainTable.add(pane).width(220).height(100);
+		
+		System.out.println(pane.isScrollX());*/
 		
 		// Change height according to number of item inside category
 		this.mainTable.add(this.categories).height(this.categories.getHeight());
