@@ -42,6 +42,9 @@ public class Shop extends Group {
 	private Table mainTable;
 	
 	
+	private ShopCategory categories;
+	
+	
 	// Conxtruction
 	
 	public Shop(GameTilesets gameTilesets, GameItems gameItems) {
@@ -119,24 +122,18 @@ public class Shop extends Group {
 		addActor(this.mainTable);
 		
 		// Add title to the UI.
-		this.mainTable.add(title).height(title.getHeight() + 10);
+		this.mainTable.add(title).height(title.getHeight() + 10).top();
 		
 		this.mainTable.row();
 		
 		// TEST
-		// Add the rest of the ui in this cell.
-		ShopSlot slotTest = new ShopSlot(this.normalStyle, this.selectedStyle);
-		slotTest.setItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 10);
-		//slotTest.setSize(200, 50);
-		this.mainTable.add(slotTest).width(200).height(70);
+		this.categories = new ShopCategory(gameTilesets);
+		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 10);
+		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 100);
+		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 1000);
 		
-		this.mainTable.row();
-		
-		// Add the rest of the ui in this cell.
-		ShopSlot slotTest2 = new ShopSlot(this.normalStyle, this.selectedStyle);
-		slotTest2.setItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 1000);
-		//slotTest.setSize(200, 50);
-		this.mainTable.add(slotTest2).width(200).height(70);
+		// Change height according to number of item inside category
+		this.mainTable.add(this.categories).height(this.categories.getHeight());
 		// END TEST
 	}
 }
