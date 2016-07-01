@@ -121,13 +121,5 @@ public class ShopSlot extends Button {
 		
 		
 		this.itemCell.setActor(this.item).width(32).height(32).pad(10);
-		//this.item.setSize(32, 32);
-		//this.item.setPosition(10, 27);
-		//this.nameLabel.setPosition(52, 43);
-		//this.priceLabel.setPosition(200 - this.priceLabel.getWidth()*40/100, 0);
-		
-		//addActor(this.item);
-		//addActor(this.nameLabel);
-		//addActor(this.priceLabel);
 	}
 }

@@ -39,7 +39,7 @@ public class Shop extends Group {
 	/** The title */
 	private Label title;
 	
-	private Table mainTable;
+	private Table mainTable, descriptionTable;
 	
 	
 	private ShopCategory categories;
@@ -122,11 +122,12 @@ public class Shop extends Group {
 		addActor(this.mainTable);
 		
 		// Add title to the UI.
-		this.mainTable.add(title).height(title.getHeight() + 10).top();
+		this.mainTable.add(title).height(title.getHeight() + 10).top().colspan(2);
 		
 		this.mainTable.row();
 		
-		// TEST
+		
+		// TODO : Put ShopCategories in a ScrollPane
 		this.categories = new ShopCategory(gameTilesets);
 		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")), 10);
 		this.categories.addItem(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("sofa"), gameTilesets.getTileset("inventoryItem")), 100);
@@ -142,7 +143,18 @@ public class Shop extends Group {
 		System.out.println(pane.isScrollX());*/
 		
 		// Change height according to number of item inside category
-		this.mainTable.add(this.categories).height(this.categories.getHeight());
-		// END TEST
+		this.mainTable.add(this.categories).height(this.categories.getHeight()).width(this.categories.getWidth());
+
+		
+		// Add description and action button
+		this.descriptionTable = new Table();
+		this.mainTable.add(this.descriptionTable).expandX();
+		
+		Label descriptionLabelTest = new Label(InventoryItem.loadItemFromJSON(this.gameItems.getItemPath("pot"), gameTilesets.getTileset("inventoryItem")).getDescription(), this.titleStyle);
+		
+		descriptionLabelTest.setWrap(true);
+		//descriptionLabelTest.setWidth(50);
+		
+		this.descriptionTable.add(descriptionLabelTest).width(100).height(100);
 	}
 }
