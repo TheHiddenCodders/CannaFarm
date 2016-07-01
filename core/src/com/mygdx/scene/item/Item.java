@@ -27,6 +27,10 @@ public class Item extends Group implements Serializable {
 	/** The item's id. */
 	private int id;
 	
+	private String title;
+	
+	private String description;
+	
 	/** The path to the JSON file. */
 	private String jsonPath;
 	
@@ -105,6 +109,17 @@ public class Item extends Group implements Serializable {
 	 */
 	public int getId() {
 		return this.id;
+	}
+	
+	
+	// Title and description methods
+	
+	public String getTitle() {
+		return this.title;
+	}
+	
+	public String getDescription() {
+		return this.description;
 	}
 	
 	
@@ -211,10 +226,12 @@ public class Item extends Group implements Serializable {
 	public void read(Json json, JsonValue jsonData) {
 		this.spriteSize = new Vector2(jsonData.child.child.asInt(), jsonData.child.child.next.asInt());
 		this.id = jsonData.child.next.asInt();
+		this.title = jsonData.child.next.next.name;
+		this.description = jsonData.child.next.next.next.asString();
 		this.setSize(spriteSize.x, spriteSize.y);
 		
-		this.tileSize = new Vector2(jsonData.child.next.next.child.asInt(), jsonData.child.next.next.child.next.asInt());
-		this.setOrigin(jsonData.child.next.next.next.child.asFloat(), jsonData.child.next.next.next.child.next.asFloat());
+		this.tileSize = new Vector2(jsonData.child.next.next.next.next.child.asInt(), jsonData.child.next.next.next.next.child.next.asInt());
+		this.setOrigin(jsonData.child.next.next.next.next.next.child.asFloat(), jsonData.child.next.next.next.next.next.child.next.asFloat());
 	}
 	
 	

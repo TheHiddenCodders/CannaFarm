@@ -10,7 +10,7 @@ tileSize: {
 items : [
 	["sofa", "null", "pot"]
 	["pot", "pot", "null"]
-	["null", "null", "itemName"]
+	["null", "null", "null"]
 ]
 flip: true
 }

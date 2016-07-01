@@ -116,7 +116,7 @@ public class ShopSlot extends Button {
 		
 		this.price = price;
 		this.item = item;
-		this.nameLabel.setText("Item name here.");
+		this.nameLabel.setText(item.getTitle());
 		this.priceLabel.setText(String.valueOf(this.price) + " CG");
 		
 		
