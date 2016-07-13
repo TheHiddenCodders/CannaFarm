@@ -83,7 +83,23 @@ public class InventoryListener extends ActorGestureListener {
 	public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
 		// Check if an item is drag
 		if (getTouchDownTarget() instanceof InventoryItem) {
-				this.dragItem.setPosition(x, y);
+				// Check if the cursor is inside the inventory (X axis)
+				if (x >= 0)
+					if (x < this.inventory.getWidth())
+						this.dragItem.setPosition(x, this.dragItem.getY());
+					else
+						this.dragItem.setPosition(this.inventory.getWidth() - this.dragItem.getWidth(), this.dragItem.getY());
+				else
+					this.dragItem.setPosition(0, this.dragItem.getY());
+				
+				// Check if the cursor is inside the inventory (Y axis)
+				if (y >= 0)
+					if ( y < this.inventory.getHeight())
+						this.dragItem.setPosition(this.dragItem.getX(), y);
+					else
+						this.dragItem.setPosition(this.dragItem.getX(), this.inventory.getHeight() - this.dragItem.getHeight());
+				else
+					this.dragItem.setPosition(this.dragItem.getX(), 0);
 		}
 		// Check if a the dragged actor is not a slot.
 		else if (!(getTouchDownTarget() instanceof InventorySlot)) {
