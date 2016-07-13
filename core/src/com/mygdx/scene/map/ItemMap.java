@@ -23,6 +23,9 @@ public class ItemMap extends Map implements Serializable {
 	
 	private Inventory inventory;
 	
+	private GameItems gameItems;
+	private Tileset itemTileset;
+	
 	
 	// Construction
 
@@ -58,7 +61,10 @@ public class ItemMap extends Map implements Serializable {
 	 * @param gameItems a reference to all game items.
 	 * @param itemTileset a reference to the tileset to set on items.
 	 */
-	private void initFromFile(GameItems gameItems, Tileset itemTileset, final Inventory inventory) {
+	private void initFromFile(final GameItems gameItems, final Tileset itemTileset, final Inventory inventory) {
+		this.gameItems = gameItems;
+		this.itemTileset = itemTileset;
+		
 		// Create items
 		this.items = new Array<Array<Item>>();
 		createItems();
@@ -83,7 +89,8 @@ public class ItemMap extends Map implements Serializable {
 				//onMap = true;
 				System.out.println("enter on map");
 				if (inventory.isItemDrag()) {
-					touchDown(event, x, y, pointer, 0);
+					Item itemToAdd = Item.loadItemFromJSON(gameItems.getItemPath("pot"), itemTileset);
+					addItem(itemToAdd, (int)pointedTile.x, (int)pointedTile.y);
 				}
 			}
 			

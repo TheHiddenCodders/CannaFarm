@@ -29,6 +29,8 @@ public class Map extends Group implements Serializable {
 	
 	/** The size of the tile's map in pixel. */
 	private Vector2 tileSize;
+	
+	protected Vector2 pointedTile;
 
 	
 	// Construction
@@ -52,6 +54,8 @@ public class Map extends Group implements Serializable {
 		this.size = new Vector2(sizeX, sizeY);
 		this.tiles.clear();
 		
+		this.pointedTile = new Vector2();
+		
 		// Browse map row.
 		for (int i = 0; i < this.size.x; i++) {
 			// Create map row.
@@ -64,16 +68,8 @@ public class Map extends Group implements Serializable {
 				// Create the tiles and add it as actor.
 				tiles.get(i).add(new Tile(id/*, tileset*/));
 				tiles.get(i).get(j).addListener(new InputListener() {
-					public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				        if (tiles.get(positionX).get(positionY).getId() == 0)
-				        	tiles.get(positionX).get(positionY).setID(1);
-				        else
-				        	tiles.get(positionX).get(positionY).setID(0);
-				        
-				        return true;
-				    }
-					
 					public boolean mouseMoved(InputEvent event, float x, float y) {
+						pointedTile.set(positionX, positionY);
 						return true;
 					}
 				});
