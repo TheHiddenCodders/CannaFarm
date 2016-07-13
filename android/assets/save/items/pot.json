@@ -1,15 +1,19 @@
 {
-spriteSize: {
-	x: 16
-	y: 16
-}
-id: 0
-tileSize: {
-	x: 1
-	y: 1
-}
-origin: {
-	x: 8
-	y: -6
-}
+	spriteSize: {
+		x: 16
+		y: 16
+	}
+	
+	id: 0
+	title: "Pot"
+	description: "La plus simple des maniere de planter."
+	
+	tileSize: {
+		x: 1
+		y: 1
+	}
+	origin: {
+		x: 8
+		y: -6
+	}
 }

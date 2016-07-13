@@ -20,6 +20,10 @@ public class InventoryItem extends Actor implements Serializable{
 	/** The item's id. */
 	private int id;
 	
+	private String title;
+	
+	private String description;
+	
 	/** The path to the JSON file. */
 	private String jsonPath;
 	
@@ -103,6 +107,17 @@ public class InventoryItem extends Actor implements Serializable{
 	}
 	
 	
+	// Title and description methods
+	
+	public String getTitle() {
+		return this.title;
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	
 	// Actors inherit methods
 
 	@Override
@@ -130,6 +145,8 @@ public class InventoryItem extends Actor implements Serializable{
 	@Override
 	public void read(Json json, JsonValue jsonData) {
 		this.id = jsonData.child.next.asInt();
+		this.title = jsonData.child.next.next.asString();
+		this.description = jsonData.child.next.next.next.asString();
 	}
 	
 	

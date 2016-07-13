@@ -1,4 +1,4 @@
-package com.mygdx.scene.inventory;
+package com.mygdx.scene.interfaces;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.mygdx.scene.item.InventoryItem;
 
-public class Slot extends Button {
+public class InventorySlot extends Button {
 	/** A reference to the item store in the slot. */
 	private InventoryItem item;
 	
@@ -37,9 +37,13 @@ public class Slot extends Button {
 	 * @param normalStyle the style to apply when the slot is not selected.
 	 * @param selectedStyle the style to apply when the slot is selected.
 	 */
-	public Slot(ButtonStyle normalStyle, ButtonStyle selectedStyle) {
+	public InventorySlot(ButtonStyle normalStyle, ButtonStyle selectedStyle) {
 		super(normalStyle);
 		
+		// Memorize styles
+		this.normalStyle = normalStyle;
+		this.selectedStyle = selectedStyle;
+				
 		// Create the label to display quantity
 		this.quantity = 0;
 		
@@ -53,10 +57,6 @@ public class Slot extends Button {
 		// Initialize item. 
 		this.item = null;
 		this.selected = false;
-		
-		// Memorize styles
-		this.normalStyle = normalStyle;
-		this.selectedStyle = selectedStyle;
 		
 		// Add a listener to manage slot's selection
 		addListener(new ActorGestureListener() {

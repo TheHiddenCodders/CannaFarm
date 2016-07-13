@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.scene.inventory.Inventory;
+import com.mygdx.scene.interfaces.Inventory;
 import com.mygdx.scene.item.Item;
 import com.mygdx.scene.resources.GameItems;
 import com.mygdx.scene.resources.GameTilesets;
@@ -76,7 +76,7 @@ public class ItemMap extends Map implements Serializable {
 		// Add the reference to the inventory
 		this.inventory = inventory;
 		
-		/*addListener(new InputListener() {
+		addListener(new InputListener() {
 			//private boolean onMap;
 			
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -89,6 +89,7 @@ public class ItemMap extends Map implements Serializable {
 			
 			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
 				//onMap = false;
+				System.out.println("exit map");
 			}
 			
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -98,7 +99,7 @@ public class ItemMap extends Map implements Serializable {
 					System.out.println("Place item on map here.");
 				}
 			}
-		});*/
+		});
 	}
 	
 	

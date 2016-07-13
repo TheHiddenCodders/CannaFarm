@@ -1,16 +1,23 @@
 {
-size: {
-	x: 3
-	y: 3
-}
-tileSize: {
-	x: 64
-	y: 32
-}
-items : [
-	["sofa", "null", "pot"]
-	["pot", "pot", "null"]
-	["null", "null", "itemName"]
-]
-flip: true
+	size: {
+		x: 10
+		y: 10
+	}
+	tileSize: {
+		x: 64
+		y: 32
+	}
+	items : [
+		["sofa", "null", "pot", "null", "null", "null", "null", "null", "null", "null"]
+		["pot", "pot", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+		["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
+	]
+	flip: true
 }

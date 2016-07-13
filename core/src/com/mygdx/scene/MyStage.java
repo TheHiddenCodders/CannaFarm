@@ -5,7 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.scene.inventory.Inventory;
+import com.mygdx.scene.interfaces.Inventory;
+import com.mygdx.scene.interfaces.Shop;
 import com.mygdx.scene.map.ItemMap;
 import com.mygdx.scene.resources.GameItems;
 import com.mygdx.scene.resources.GameTilesets;
@@ -16,6 +17,7 @@ public class MyStage extends Stage {
 	private GameItems itemsPaths;
 	private ItemMap map;
 	private Inventory inventory;
+	private Shop shop;
 	
 
 	public MyStage(Viewport viewport) {
@@ -30,6 +32,9 @@ public class MyStage extends Stage {
 		this.inventory.setVisible(false);
 		//inventory.setPosition(100, 100);
 		//inventory.setSize(200, 200);
+		
+		this.shop = new Shop(this.gameTilesets, this.itemsPaths);
+		this.shop.setVisible(false);
 				
 		// Create a map
 		this.map = ItemMap.loadFromJSON("save/map/itemMap.json", this.gameTilesets, this.itemsPaths, this.inventory);
@@ -37,6 +42,7 @@ public class MyStage extends Stage {
 		
 		addActor(this.map);
 		addActor(this.inventory);
+		addActor(this.shop);
 		
 		//InventoryItem item = InventoryItem.loadItemFromJSON(itemsPaths.getItemPath("pot"), gameTilesets.getTileset("inventoryItem"));
 		//addActor(item);
@@ -51,6 +57,16 @@ public class MyStage extends Stage {
 						inventory.setVisible(true);
 					}
 				}
+				else if (keycode == Keys.M) {
+					if (shop.isVisible()) {
+						shop.setVisible(false);
+					}
+					else {
+						shop.setVisible(true);
+					}
+				}
+				
+				
 				return true;
 			}
 		});
